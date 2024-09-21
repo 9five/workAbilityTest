@@ -8,19 +8,19 @@ import (
 )
 
 type TradingHandler struct {
-	tradingUsecase domain.TradingUsecase
+	TradingUsecase domain.TradingUsecase
 }
 
 func NewTradingHandler(router *gin.RouterGroup, tradingUsecase domain.TradingUsecase) {
 	handler := &TradingHandler{
-		tradingUsecase: tradingUsecase,
+		TradingUsecase: tradingUsecase,
 	}
 
 	router.GET("", handler.OrderBookGen)
 }
 
 func (t *TradingHandler) OrderBookGen(ctx *gin.Context) {
-	orderBook, err := t.tradingUsecase.GetOrderBook(ctx, "ETHBTC")
+	orderBook, err := t.TradingUsecase.GetOrderBook(ctx, "ETHBTC")
 	if err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{
 			"error": err.Error(),
